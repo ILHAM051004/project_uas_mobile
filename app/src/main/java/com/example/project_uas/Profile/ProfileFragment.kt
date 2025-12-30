@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
         binding.tvHp.text = session.getPhone()
 
         binding.btnLogout.setOnClickListener {
-            session.logout() // Hapus data login dari HP
+            session.logout()
             val intent = Intent(requireContext(), Login::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
