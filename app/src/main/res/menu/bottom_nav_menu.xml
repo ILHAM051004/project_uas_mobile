@@ -21,7 +21,7 @@
         android:title="Komentar" />
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/profile"
         android:title="Profil"
         android:icon="@drawable/user" />
 </menu>

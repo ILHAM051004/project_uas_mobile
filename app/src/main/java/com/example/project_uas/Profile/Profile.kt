@@ -1,4 +1,4 @@
-package com.example.project_uas.Model
+package com.example.project_uas.Profile
 
 import kotlinx.serialization.Serializable
 

@@ -14,19 +14,23 @@ import com.example.project_uas.databinding.ActivityBaseBinding
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityBaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
 
-        // sebagai fragment default
-        replaceFragment(HomeFragment())
+        // Tampilan default saat pertama kali dibuka
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment())
+        }
 
         binding.bottomNavView.setOnItemSelectedListener {
             when (it.itemId) {
@@ -46,6 +50,11 @@ class BaseActivity : AppCompatActivity() {
                     replaceFragment(CommentFragment())
                     true
                 }
+                R.id.profile -> {
+                    // PERBAIKAN: Gunakan replaceFragment, bukan Intent
+                    replaceFragment(ProfileFragment())
+                    true // Set true agar menu terpilih secara visual
+                }
                 else -> false
             }
         }
@@ -54,7 +63,6 @@ class BaseActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
-            //.addToBackStack(null) -> ini kita nonaktifkan agar saat back langsung keluar aplikasi
             .commit()
     }
 }
