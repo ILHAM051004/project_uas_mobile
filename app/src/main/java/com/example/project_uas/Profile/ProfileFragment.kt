@@ -26,7 +26,6 @@ class ProfileFragment : Fragment() {
 
         val session = com.example.project_uas.utils.SessionManager(requireContext())
 
-        // Ambil data dari penyimpanan lokal (Auto-Login Data)
         binding.tvNama.text = session.getNama()
         binding.tvEmail.text = session.getEmail()
         binding.tvHp.text = session.getPhone()
