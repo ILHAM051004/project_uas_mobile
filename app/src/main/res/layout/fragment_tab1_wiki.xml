@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".Home.Tab1WikiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Judul Besar -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🤖 Mengenal ONNX"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <!-- Card Utama -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_card"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:elevation="5dp">
+
+            <!-- Bagian Penjelasan -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🧩 ONNX (Open Neural Network Exchange) adalah format universal yang digunakan untuk menyimpan model AI agar bisa dijalankan di berbagai platform dan framework. Bayangin kayak 'bahasa bersama' buat model AI dari PyTorch, TensorFlow, atau Scikit-learn."
+                android:textColor="#3E2723"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp" />
+
+            <!-- Garis Pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7CCC8"
+                android:layout_marginVertical="6dp" />
+
+            <!-- Manfaat -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🌟 Kenapa ONNX Penting?"
+                android:textStyle="bold"
+                android:textColor="#5D4037"
+                android:textSize="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ Bisa jalan di banyak framework dan hardware\n✅ Bikin kerja tim lebih mudah meski pakai alat berbeda\n✅ Eksekusi model bisa lebih cepat karena ONNX Runtime dioptimasi\n✅ Nggak perlu ulang koding pas pindah platform"
+                android:textColor="#3E2723"
+                android:textSize="15.5sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="10dp" />
+
+            <!-- Garis Pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7CCC8"
+                android:layout_marginVertical="6dp" />
+
+            <!-- Contoh Dunia Nyata -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💼 Contoh Nyata"
+                android:textStyle="bold"
+                android:textColor="#5D4037"
+                android:textSize="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Misalnya, tim e-commerce melatih model rekomendasi produk di PyTorch. Tapi sistem produksinya di Azure ML yang pakai ONNX Runtime. Dengan ONNX, mereka cukup ekspor model ke format .onnx, dan model langsung bisa dipakai tanpa ubah kode — cepat dan efisien!"
+                android:textColor="#3E2723"
+                android:textSize="15.5sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="6dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎯 Intinya: ONNX bikin model AI lebih fleksibel, cepat, dan siap digunakan di mana saja!"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingTop="6dp"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

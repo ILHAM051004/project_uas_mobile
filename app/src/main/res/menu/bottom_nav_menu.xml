@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/wahana"
+        android:icon="@drawable/outline_add_reaction_24"
+        android:title="Wahana" />
+
+    <item
+        android:id="@+id/tiket"
+        android:icon="@drawable/baseline_article_24"
+        android:title="Tiket" />
+
+    <item
+        android:id="@+id/comment"
+        android:icon="@drawable/baseline_article_24"
+        android:title="Komentar" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:title="Profil"
+        android:icon="@drawable/user" />
+</menu>

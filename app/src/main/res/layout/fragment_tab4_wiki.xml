@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".Home.Tab4WikiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Judul -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🦁 Prediksi Kategori Hewan (Zoo)"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <!-- Card Utama -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_card"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:elevation="5dp">
+
+            <!-- Hair -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_hair"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hair (0 atau 1)"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_hair"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Feathers -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_feathers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Feathers (0 atau 1)"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_feathers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Eggs -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_eggs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Eggs (0 atau 1)"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_eggs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Milk -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_milk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Milk (0 atau 1)"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_milk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Airborne -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_airborne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Airborne (0 atau 1)"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_airborne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Aquatic -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_aquatic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Aquatic (0 atau 1)"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_aquatic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="#3E2723"
+                    android:backgroundTint="#5D4037"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Hasil Prediksi -->
+            <TextView
+                android:id="@+id/zoo_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hasil: -"
+                android:textColor="#4E342E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:paddingBottom="12dp" />
+
+            <!-- Tombol Prediksi -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnZooPredict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prediksi"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/bgButton2"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

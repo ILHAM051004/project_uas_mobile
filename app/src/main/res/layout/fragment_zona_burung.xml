@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:padding="24dp"
+    tools:context=".Home.ZonaBurungFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvJudulBurung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Zona Burung"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgBurung"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/burung"
+            android:contentDescription="Gambar Zona Burung"
+            android:scaleType="centerCrop"
+            android:src="@drawable/burung" />
+
+        <TextView
+            android:id="@+id/tvDeskripsiBurung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:lineSpacingExtra="6dp"
+            android:text="Zona Burung menampilkan berbagai jenis unggas dari seluruh dunia, seperti merak, elang, flamingo, dan burung kakaktua. Di area ini, pengunjung bisa menikmati keindahan bulu warna-warni serta mendengarkan kicauan alami yang menenangkan."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

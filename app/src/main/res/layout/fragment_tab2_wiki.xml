@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".Home.Tab2WikiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Judul Besar -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📦 Penyimpanan Model dalam Format .ONNX"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <!-- Card Utama -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_card"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:elevation="5dp">
+
+            <!-- Penjelasan -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🧠 Saat model AI disimpan dalam format .onnx, semua informasi penting di dalamnya — seperti struktur jaringan (layer-layer), bobot (weights), dan parameter — disatukan dalam satu file biner. Jadi cukup satu file untuk mewakili keseluruhan model."
+                android:textColor="#3E2723"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="12dp" />
+
+            <!-- Garis Pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7CCC8"
+                android:layout_marginVertical="6dp" />
+
+            <!-- Kenapa Disimpan Begitu -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📘 Kenapa Format Ini Dipilih?"
+                android:textStyle="bold"
+                android:textColor="#5D4037"
+                android:textSize="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ File .onnx mudah dibaca oleh berbagai framework AI\n✅ Lebih efisien karena semua data disimpan terstruktur\n✅ Bisa langsung digunakan di berbagai perangkat tanpa konversi ulang\n✅ Cocok buat kolaborasi antar tim yang pakai alat berbeda"
+                android:textColor="#3E2723"
+                android:textSize="15.5sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="10dp" />
+
+            <!-- Garis Pemisah -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7CCC8"
+                android:layout_marginVertical="6dp" />
+
+            <!-- Contoh Ilustrasi -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💾 Ilustrasi Sederhana"
+                android:textStyle="bold"
+                android:textColor="#5D4037"
+                android:textSize="18sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bayangin kamu punya model AI seperti 'otak kecil' yang sudah dilatih mengenali gambar kucing 🐱. Saat disimpan ke .onnx, semua 'pengetahuan' tentang kucing itu dikemas jadi satu file — misalnya model_kucing.onnx. File ini bisa dibuka dan dijalankan di aplikasi lain tanpa perlu dilatih ulang!"
+                android:textColor="#3E2723"
+                android:textSize="15.5sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingBottom="6dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎯 Singkatnya: Format .onnx menyimpan model dengan rapi, lengkap, dan siap pakai di mana saja!"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6dp"
+                android:paddingTop="6dp"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

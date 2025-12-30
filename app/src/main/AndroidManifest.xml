@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Project_uas">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".Register"
+            android:exported="false"
+            android:theme="@style/Theme.Project_uas" />
+
+        <activity
+            android:name=".QRCode.QRCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Comment.CommentFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.WikiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeScreen.Welcome"
+            android:exported="false" />
+        <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.Hewan"
+            android:exported="false" />
+        <activity
+            android:name=".Home.Zona"
+            android:exported="false" />
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Home.WebView"
+            android:exported="false" />
+        <activity
+            android:name=".Home.Tiket"
+            android:exported="false" />
+        <activity
+            android:name=".Home.Info"
+            android:exported="false" />
+        <activity
+            android:name=".Home.RumusBangunDatarBangunRuang"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+    </application>
+
+</manifest>

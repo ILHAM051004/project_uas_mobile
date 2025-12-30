@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:padding="24dp"
+    tools:context=".Home.ZonaReptilFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvJudulReptil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Zona Reptil"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgReptil"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/reptil"
+            android:contentDescription="Gambar Zona Reptil"
+            android:scaleType="centerCrop"
+            android:src="@drawable/reptil" />
+
+        <TextView
+            android:id="@+id/tvDeskripsiReptil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:lineSpacingExtra="6dp"
+            android:text="Zona Reptil menampilkan berbagai jenis hewan melata seperti ular, kadal, buaya, dan kura-kura. Di sini pengunjung dapat mengenal lebih dekat dunia reptil yang unik, serta belajar bagaimana mereka bertahan hidup di alam liar."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

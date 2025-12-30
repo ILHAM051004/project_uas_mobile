@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".Home.HomeFragment">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/bgButton3"
+            android:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Tombol Logout tetap di atas Toolbar -->
+    <Button
+        android:id="@+id/tombolLogout"
+        android:layout_width="109dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="@color/bgButton3"
+        android:text="Logout"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="top|end" />
+
+    <!-- Konten scrollable -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/logo2"
+                android:layout_width="307dp"
+                android:layout_height="190dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="Logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/judulWelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_28pt_extrabold"
+                android:text="Selamat Datang"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo2" />
+
+            <TextView
+                android:id="@+id/deskripsiWelcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter_28pt_semibold"
+                android:gravity="center"
+                android:text="Eksplorasi dunia satwa dalam genggaman. Mulai perjalanan seru bersama ZooApp sekarang!"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/judulWelcome" />
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/gridMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:padding="16dp"
+                app:columnCount="2"
+                app:layout_constraintTop_toBottomOf="@id/deskripsiWelcome"
+                app:useDefaultMargins="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tombol1"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Rumus"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tombol2"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Tiket"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tombol3"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Info"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tombolWebView"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Website"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/zona"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Zona"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/hewan"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Hewan"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/wikiONNX"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="Wiki ONNX"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/QRCode"
+                    android:backgroundTint="@color/bgButton2"
+                    android:fontFamily="@font/inter_28pt_medium"
+                    android:text="QR Code"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+            </androidx.gridlayout.widget.GridLayout>
+
+            <TextView
+                android:id="@+id/tvSlogan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Slogan ZooApp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gridMenu" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSlogan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSlogan" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
