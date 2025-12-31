@@ -16,7 +16,11 @@ class TabQrcodeFragment : Fragment() {
     private var _binding: FragmentTabQrcodeBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentTabQrcodeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -24,27 +28,39 @@ class TabQrcodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Ambil ID Tiket otomatis
-        val idOtomatis = arguments?.getString("ID_TIKET_OTOMATIS")
+        // 1. Ambil ID Tiket dan Detail dari Pembayaran
+        val idTiket = arguments?.getString("ID_TIKET_OTOMATIS")
+        val wahana = arguments?.getString("WAHANA") ?: "Wahana"
+        val jumlah = arguments?.getString("JUMLAH") ?: "0"
+        val kategori = arguments?.getString("KATEGORI") ?: "Umum"
 
-        if (idOtomatis != null) {
-            // 2. SEMBUNYIKAN SEMUA INPUTAN (Agar tampilan tidak seperti di screenshot)
-            binding.edtQrInput.visibility = View.GONE
-            binding.edtTanggal.visibility = View.GONE
-            binding.edtJumlah.visibility = View.GONE
-            binding.btnGenerate.visibility = View.GONE
+        if (idTiket != null) {
+            // 2. Tampilkan Detail Pembelian
+            binding.tvDetailTiket.text = """
+                🎫 RINCIAN E-TICKET
+                ------------------------------------------
+                ID Transaksi : $idTiket
+                Wahana       : $wahana
+                Kategori     : $kategori
+                Jumlah       : $jumlah Tiket
+                ------------------------------------------
+                Status       : LUNAS / AKTIF
+                
+                Tunjukkan QR Code ini kepada petugas.
+            """.trimIndent()
 
-            // 3. Langsung Generate dan Tampilkan QR
-            val bitmap = createQR(idOtomatis)
-            binding.ivQrCode.setImageBitmap(bitmap)
+            // 3. Generate QR Code secara otomatis
+            binding.ivQrCode.setImageBitmap(createQR(idTiket))
         }
     }
 
-    // Fungsi Logika Pembuatan Gambar QR
+    // Fungsi Internal Pembuat QR
     private fun createQR(text: String): Bitmap {
         val writer = QRCodeWriter()
-        val matrix = writer.encode(text, BarcodeFormat.QR_CODE, 512, 512,
-            mapOf(EncodeHintType.CHARACTER_SET to "UTF-8"))
+        val matrix = writer.encode(
+            text, BarcodeFormat.QR_CODE, 512, 512,
+            mapOf(EncodeHintType.CHARACTER_SET to "UTF-8")
+        )
         val bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
         for (x in 0 until 512) {
             for (y in 0 until 512) {

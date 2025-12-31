@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     android:padding="24dp">
 
     <LinearLayout
@@ -10,45 +11,34 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtQrInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Pemesan"
-            android:inputType="text" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtTanggal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Tanggal (YYYY-MM-DD)"
-            android:focusable="false"
-            android:clickable="true" />
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtJumlah"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Jumlah Tiket"
-            android:inputType="number" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGenerate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Generate" />
-
         <ImageView
             android:id="@+id/ivQrCode"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="24dp"
-            android:background="#f0f0f0"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/white"
+            android:padding="12dp"
             android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/tvDetailTiket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/bgButton3"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:lineSpacingExtra="6dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtQrInput" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTanggal" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtJumlah" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGenerate" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

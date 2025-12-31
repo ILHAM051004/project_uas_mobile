@@ -60,10 +60,13 @@ class PembayaranFragment : Fragment() {
                         .setMessage("ID Tiket: $idTiket\nKlik OK untuk melihat QR Code.")
                         .setCancelable(false)
                         .setPositiveButton("OK") { _, _ ->
-                            // KIRIM DATA DENGAN KEY YANG BENAR: ID_TIKET_OTOMATIS
+                            // Di dalam PembayaranFragment.kt saat klik tombol Bayar
                             val fragmentQR = TabQrcodeFragment().apply {
                                 arguments = Bundle().apply {
                                     putString("ID_TIKET_OTOMATIS", idTiket)
+                                    putString("WAHANA", wahana)
+                                    putString("JUMLAH", jumlah)
+                                    putString("KATEGORI", kategori)
                                 }
                             }
                             (activity as BaseActivity).replaceFragment(fragmentQR)
