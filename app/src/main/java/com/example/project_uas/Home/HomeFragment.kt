@@ -118,7 +118,7 @@ class HomeFragment : Fragment() {
         }
 
         // untuk aktivitas tombol qr code
-        binding.QRCode.setOnClickListener {
+        binding.ScanCode.setOnClickListener {
             val intent = Intent(requireContext(), QRCodeActivity::class.java)
             startActivity(intent)
         }

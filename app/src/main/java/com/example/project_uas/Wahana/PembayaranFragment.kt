@@ -1,14 +1,20 @@
 package com.example.project_uas.Wahana
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.project_uas.BaseActivity
 import com.example.project_uas.QRCode.TabQrcodeFragment
 import com.example.project_uas.QRCode.TiketAPI
+import com.example.project_uas.Utils.NotificationHelper
+import com.example.project_uas.Utils.PermissionHelper
+import com.example.project_uas.Utils.ReminderHelper
 import com.example.project_uas.databinding.FragmentPembayaranBinding
 import com.example.project_uas.supabase.SupabaseClient
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -17,6 +23,17 @@ import kotlinx.coroutines.launch
 class PembayaranFragment : Fragment() {
     private var _binding: FragmentPembayaranBinding? = null
     private val binding get() = _binding!!
+
+    // Launcher untuk meminta izin notifikasi (Wajib untuk Android 13+)
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            Toast.makeText(context, "Notifikasi diizinkan", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Izin notifikasi ditolak. Anda tidak akan menerima pengingat.", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +47,13 @@ class PembayaranFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Cek izin notifikasi saat halaman dibuka
+        if (PermissionHelper.isNotificationPermissionRequired()) {
+            if (!PermissionHelper.hasPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)) {
+                PermissionHelper.requestPermission(requestPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
         val wahana = arguments?.getString("WAHANA") ?: "-"
         val jumlah = arguments?.getString("JUMLAH") ?: "1"
         val kategori = arguments?.getString("KATEGORI") ?: "Umum"
@@ -38,29 +62,40 @@ class PembayaranFragment : Fragment() {
         binding.tvOrderSummary.text = "Wahana: $wahana\nKategori: $kategori\nJumlah: $jumlah Tiket"
         binding.tvTotalBayar.text = "Total: Rp $total"
 
-        // Di dalam PembayaranFragment.kt
-        // Di dalam PembayaranFragment.kt
         binding.btnBayarSimulasi.setOnClickListener {
-            val wahana = arguments?.getString("WAHANA") ?: "-"
-            val jumlah = arguments?.getString("JUMLAH") ?: "1"
-            // Membuat ID Tiket unik
             val idTiket = "ZOO-" + System.currentTimeMillis().toString().takeLast(6)
 
             lifecycleScope.launch {
                 try {
                     val api = TiketAPI(SupabaseClient.client)
-                    // Simpan ke Supabase
+                    // Simpan data ke Supabase
                     api.createTiket(wahana, "2025-01-12", jumlah.toInt())
 
-                    // Notifikasi (Syarat Pertemuan 14)
-                    Toast.makeText(context, "🔔 Tiket Berhasil Dipesan!", Toast.LENGTH_SHORT).show()
+                    // 1. Kirim Notifikasi Instan
+                    NotificationHelper.showNotification(
+                        requireContext(),
+                        "Pembayaran Berhasil!",
+                        "Tiket $wahana Anda sudah aktif. Silakan tunjukkan QR Code.",
+                        Intent(requireContext(), com.example.project_uas.QRCode.QRCodeActivity::class.java)
+                    )
 
+                    // 2. Set Reminder Tepat 5 Detik dari sekarang
+                    val triggerTime = System.currentTimeMillis() + 5000
+                    ReminderHelper.setReminder(
+                        context = requireContext(),
+                        timeInMillis = triggerTime,
+                        title = "ZooApp Reminder",
+                        message = "Waktunya masuk ke wahana $wahana!",
+                        targetActivity = com.example.project_uas.QRCode.QRCodeActivity::class.java
+                    )
+
+                    // Munculkan Dialog Konfirmasi
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Pembayaran Berhasil!")
-                        .setMessage("ID Tiket: $idTiket\nKlik OK untuk melihat QR Code.")
+                        .setMessage("ID Tiket: $idTiket\nNotifikasi pengingat akan muncul dalam 5 detik.")
                         .setCancelable(false)
                         .setPositiveButton("OK") { _, _ ->
-                            // Di dalam PembayaranFragment.kt saat klik tombol Bayar
+                            // Pindah ke Fragment QR Code dengan data lengkap
                             val fragmentQR = TabQrcodeFragment().apply {
                                 arguments = Bundle().apply {
                                     putString("ID_TIKET_OTOMATIS", idTiket)
@@ -71,22 +106,12 @@ class PembayaranFragment : Fragment() {
                             }
                             (activity as BaseActivity).replaceFragment(fragmentQR)
                         }.show()
+
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-    }
-
-    // Di dalam PembayaranFragment.kt
-    private fun pushNotification(id: String) {
-        val builder = com.google.android.material.snackbar.Snackbar.make(
-            binding.root,
-            "🔔 Pengingat: Tiket #$id Berhasil Dipesan! Jangan telat datang ya.",
-            com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE
-        )
-        builder.setAction("Tutup") { builder.dismiss() }
-        builder.show()
     }
 
     override fun onDestroyView() {

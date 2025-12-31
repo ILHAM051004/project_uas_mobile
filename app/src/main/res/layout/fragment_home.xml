@@ -153,10 +153,10 @@
                     app:layout_gravity="fill_horizontal" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/QRCode"
+                    android:id="@+id/ScanCode"
                     android:backgroundTint="@color/bgButton2"
                     android:fontFamily="@font/inter_28pt_medium"
-                    android:text="QR Code"
+                    android:text="Scan Code"
                     app:layout_columnWeight="1"
                     app:layout_gravity="fill_horizontal" />
             </androidx.gridlayout.widget.GridLayout>

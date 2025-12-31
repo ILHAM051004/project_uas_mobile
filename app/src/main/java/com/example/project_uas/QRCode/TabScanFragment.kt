@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.project_uas.databinding.FragmentTabScanBinding
 import com.example.project_uas.supabase.SupabaseClient
+import com.example.project_uas.Utils.PermissionHelper
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -29,23 +30,22 @@ class TabScanFragment : Fragment() {
         BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE).build()
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) startCamera() else Toast.makeText(context, "Izin kamera ditolak", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTabScanBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == 0) {
-            startCamera()
+        // Gunakan Helper Pertemuan 14
+        if (!PermissionHelper.hasPermission(requireContext(), Manifest.permission.CAMERA)) {
+            PermissionHelper.requestPermission(permissionLauncher, Manifest.permission.CAMERA)
         } else {
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) { if (it) startCamera() }.launch(
-                Manifest.permission.CAMERA
-            )
+            startCamera()
         }
     }
 
@@ -53,49 +53,33 @@ class TabScanFragment : Fragment() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build()
-                .apply { setSurfaceProvider(binding.previewView.surfaceProvider) }
+            val preview = Preview.Builder().build().apply { setSurfaceProvider(binding.previewView.surfaceProvider) }
             val imageAnalyzer = ImageAnalysis.Builder().build().apply {
                 setAnalyzer(Executors.newSingleThreadExecutor()) { imageProxy ->
                     val mediaImage = imageProxy.image
                     if (mediaImage != null && isScanning) {
-                        val image = InputImage.fromMediaImage(
-                            mediaImage,
-                            imageProxy.imageInfo.rotationDegrees
-                        )
+                        val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
                         scanner.process(image).addOnSuccessListener { barcodes ->
-                            if (barcodes.isNotEmpty()) {
-                                verifikasiKeSupabase(barcodes[0].rawValue ?: "")
-                            }
+                            if (barcodes.isNotEmpty()) verifikasiKeSupabase(barcodes[0].rawValue ?: "")
                         }.addOnCompleteListener { imageProxy.close() }
                     } else imageProxy.close()
                 }
             }
-            cameraProvider.bindToLifecycle(
-                viewLifecycleOwner,
-                CameraSelector.DEFAULT_BACK_CAMERA,
-                preview,
-                imageAnalyzer
-            )
+            cameraProvider.bindToLifecycle(viewLifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageAnalyzer)
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    // Logika verifikasi saat Scan berhasil
     private fun verifikasiKeSupabase(idTiket: String) {
         isScanning = false
         lifecycleScope.launch {
             val api = TiketAPI(SupabaseClient.client)
-            // Mengecek keberadaan data di cloud
-            val tiket = api.getTiketById(idTiket)
+            val tiket = api.getTiketById(idTiket) // Cek Cloud
 
             activity?.runOnUiThread {
                 if (tiket != null) {
-                    // Tampilan jika Tiket Terdaftar
-                    binding.tvScanResult.text =
-                        "✅ VALID: ${tiket.nama}\nJumlah: ${tiket.jumlah} Tiket"
-                    binding.tvScanResult.setBackgroundColor(Color.parseColor("#4CAF50"))
+                    binding.tvScanResult.text = "✅ VALID: ${tiket.nama}\nJumlah: ${tiket.jumlah}"
+                    binding.tvScanResult.setBackgroundColor(Color.GREEN)
                 } else {
-                    // Tampilan jika Tiket Palsu
                     binding.tvScanResult.text = "❌ TIKET TIDAK TERDAFTAR"
                     binding.tvScanResult.setBackgroundColor(Color.RED)
                 }
@@ -103,5 +87,10 @@ class TabScanFragment : Fragment() {
             kotlinx.coroutines.delay(5000)
             isScanning = true
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
