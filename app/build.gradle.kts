@@ -62,6 +62,7 @@ dependencies {
 
     // ML Kit QR code
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     // ZXing QR generator
     implementation("com.google.zxing:core:3.5.2")
