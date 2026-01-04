@@ -26,36 +26,31 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Menginisialisasi SessionManager dari package utils
+        // Menginisialisasi SessionManager
         val session = com.example.project_uas.utils.SessionManager(requireContext())
 
-        // Menampilkan data user dari session
-        binding.tvNama.text = session.getNama()
-        binding.tvEmail.text = session.getEmail()
-        binding.tvHp.text = session.getPhone()
+        // Menampilkan data user ke dalam TextInputEditText
+        binding.tvNama.setText(session.getNama())
+        binding.tvEmail.setText(session.getEmail())
+        binding.tvHp.setText(session.getPhone())
 
-        // Logika Tombol Logout dengan Dialog Konfirmasi
+        // Tombol Logout dengan konfirmasi
         binding.btnLogout.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Logout")
-                .setMessage("Apakah Anda yakin ingin logout?")
+                .setMessage("Apakah Anda yakin ingin logout dari ZooApp?")
                 .setPositiveButton("Ya") { dialog, _ ->
-                    // Eksekusi logout dari session
                     session.logout()
-
                     dialog.dismiss()
 
-                    // Berpindah ke halaman Login dan membersihkan tumpukan activity
+                    // Pindah ke Login dan hapus stack activity
                     val intent = Intent(requireContext(), Login::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     requireActivity().finish()
                 }
                 .setNegativeButton("Tidak") { dialog, _ ->
-                    // Membatalkan logout dan memberi feedback snackbar
-                    Snackbar.make(binding.root, "Logout dibatalkan", Snackbar.LENGTH_SHORT)
-                        .setAction("Tutup") { }
-                        .show()
+                    Snackbar.make(binding.root, "Logout dibatalkan", Snackbar.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
                 .show()

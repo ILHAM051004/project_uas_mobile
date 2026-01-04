@@ -38,16 +38,17 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //Kode ini harus selalu dipanggil saat butuh akses "user_pref"
-        val sharedPref = requireContext().getSharedPreferences("user_pref", MODE_PRIVATE)
-        val sp_username = sharedPref.getString("username", "")
+        super.onViewCreated(view, savedInstanceState)
 
-        // untuk toolbar
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            title = "Home"
-        }
-        binding.judulWelcome.text = "Selamat Datang " + "$sp_username"
+        // Gunakan SessionManager agar datanya sama dengan saat Login
+        val session = com.example.project_uas.utils.SessionManager(requireContext())
+        val namaUser = session.getNama() ?: "Pengunjung" // Ambil nama yang disimpan
+
+        // Set teks ke TextView judulWelcome yang ada di atas imgHeader
+        binding.judulWelcome.text = "Welcome, $namaUser"
+
+        // Load Slogan API
+        loadSloganList()
 
         // untuk aktivitas tombol 1
         binding.tombol1.setOnClickListener {
@@ -102,14 +103,12 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), QRCodeActivity::class.java)
             startActivity(intent)
         }
-
-        //api slogan
-        loadSloganList()
     }
 
     private fun loadSloganList() {
         lifecycleScope.launch {
             try {
+                // Ganti string ini dengan Anon Key terbaru dari Dashboard Supabase Anda
                 val anonKey =
                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2a2hrb2pwc2Vleml4ZWNzYnVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4ODUyMjEsImV4cCI6MjA3OTQ2MTIyMX0.ljVwoDVl0VvNJS2rSB1h4tau5Va0dBh7M_y5-5bOyeI"
 
@@ -118,12 +117,21 @@ class HomeFragment : Fragment() {
                     token = "Bearer $anonKey"
                 )
 
-                binding.rvSlogan.adapter = SloganAdapter(data)
-                binding.rvSlogan.layoutManager = GridLayoutManager(requireContext(), 2)
+                // Gunakan requireActivity().runOnUiThread jika perlu,
+                // tapi lifecycleScope.launch sudah berjalan di main thread untuk binding
+                if (data.isNotEmpty()) {
+                    binding.rvSlogan.apply {
+                        layoutManager = LinearLayoutManager(requireContext())
+                        adapter = SloganAdapter(data)
+                    }
+                    android.util.Log.d("API_SUCCESS", "Data berhasil dimuat: ${data.size} item")
+                } else {
+                    android.util.Log.d("API_SUCCESS", "Data kosong di tabel")
+                }
 
             } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "Gagal memuat slogan", Toast.LENGTH_SHORT).show()
+                // Cek pesan ini di Logcat untuk tahu alasan gagal (401=Key Salah, 404=Tabel Salah)
+                android.util.Log.e("API_ERROR", "Detail Error: ${e.message}")
             }
         }
     }
