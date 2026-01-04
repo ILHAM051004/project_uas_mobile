@@ -1,15 +1,17 @@
-package com.example.project_uas
+package com.example.project_uas.WelcomeScreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.DecelerateInterpolator
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen // Import Spesifik
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.project_uas.WelcomeScreen.Welcome
-import com.example.project_uas.utils.SessionManager // Impor SessionManager
+import com.example.project_uas.BaseActivity
 import com.example.project_uas.databinding.ActivitySplashScreenBinding
+import com.example.project_uas.utils.SessionManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -17,32 +19,46 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // PERBAIKAN: Panggil installSplashScreen() SEBELUM super.onCreate tanpa parameter
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inisialisasi SessionManager
+        // --- ANIMASI ELEGAN ---
+        binding.logo.alpha = 0f
+        binding.logo.scaleX = 0.8f
+        binding.logo.scaleY = 0.8f
+
+        binding.logo.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(1200)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
+
         val sessionManager = SessionManager(this)
 
         lifecycleScope.launch {
-            delay(2000) // Delay 2 detik
+            delay(2500)
 
-            // LOGIKA PERUBAHAN: Cek status login
             if (sessionManager.isLoggedIn()) {
-                // Jika sudah login, langsung ke halaman Utama (BaseActivity)
                 val intent = Intent(this@SplashScreenActivity, BaseActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             } else {
-                // Jika belum login, arahkan ke Welcome Screen atau Login
                 val intent = Intent(this@SplashScreenActivity, Welcome::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             finish()
         }

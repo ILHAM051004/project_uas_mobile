@@ -10,92 +10,136 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="90dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/kotakUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="32dp"
-        android:hint="Inputkan Username"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_28pt_semibold"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:letterSpacing="-0.02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <TextView
+        android:id="@+id/tvSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login to your account"
+        android:textColor="#D1D1D1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/kotakUsername"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        app:boxBackgroundColor="#F2F5F3"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxCornerRadiusTopEnd="25dp"
+        app:boxCornerRadiusTopStart="25dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/bg"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSub"
         app:startIconDrawable="@drawable/user"
-        app:startIconTint="@color/white">
+        app:startIconTint="@color/bg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
+            android:hint="Username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white" />
+            android:fontFamily="@font/inter_28pt_medium"
+            android:textColor="@color/bg"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/kotakPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="12dp"
-        android:hint="Inputkan Password"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        app:boxBackgroundColor="#F2F5F3"
+        app:boxCornerRadiusBottomEnd="25dp"
+        app:boxCornerRadiusBottomStart="25dp"
+        app:boxCornerRadiusTopEnd="25dp"
+        app:boxCornerRadiusTopStart="25dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintTextColor="@color/bg"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/kotakUsername"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/white"
+        app:passwordToggleTint="@color/bg"
         app:startIconDrawable="@drawable/password"
-        app:startIconTint="@color/white">
+        app:startIconTint="@color/bg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
+            android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_28pt_medium"
             android:inputType="textPassword"
-            android:textColor="@color/white" />
+            android:textColor="@color/bg"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tombolLogin"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/bgButton2"
+        android:fontFamily="@font/inter_28pt_semibold"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/kotakPassword" />
 
     <TextView
         android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginTop="24dp"
         android:padding="8dp"
-        android:text="Belum punya akun? Register"
+        android:text="Don't have account? Sign Up"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/kotakPassword"
-        app:layout_constraintTop_toBottomOf="@id/kotakPassword" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/tombolLogin"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/bgButton2"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:icon="@drawable/reshot_icon_check_in_28qdar4cpv"
-        app:iconGravity="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRegister" />
+        app:layout_constraintTop_toBottomOf="@id/tombolLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

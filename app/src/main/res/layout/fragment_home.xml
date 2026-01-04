@@ -22,18 +22,6 @@
             android:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Tombol Logout tetap di atas Toolbar -->
-    <Button
-        android:id="@+id/tombolLogout"
-        android:layout_width="109dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="12dp"
-        android:backgroundTint="@color/bgButton3"
-        android:text="Logout"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_anchor="@id/appBarLayout"
-        app:layout_anchorGravity="top|end" />
 
     <!-- Konten scrollable -->
     <androidx.core.widget.NestedScrollView

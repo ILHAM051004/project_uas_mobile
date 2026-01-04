@@ -64,5 +64,9 @@ class Register : AppCompatActivity() {
                 }
             }
         }
+
+        binding.tvLogin.setOnClickListener {
+            finish()
+        }
     }
 }

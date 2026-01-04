@@ -67,7 +67,7 @@
             android:name=".Home.Zona"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".WelcomeScreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

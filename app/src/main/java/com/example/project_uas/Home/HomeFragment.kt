@@ -73,26 +73,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        // untuk aktivitas tombol logout
-        binding.tombolLogout.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext()).setTitle("Logout")
-                .setMessage("Apakah Anda yakin ingin logout?")
-                .setPositiveButton("Ya") { dialog, _ ->
-                    val editor = sharedPref.edit()
-                    editor.clear()
-                    editor.apply()
-                    dialog.dismiss()
-                    val intent = Intent(requireContext(), Login::class.java)
-                    startActivity(intent)
-                }.setNegativeButton("Tidak") { dialog, _ ->
-                    Snackbar.make(binding.root, "Logout dibatalkan", Snackbar.LENGTH_SHORT)
-                        .setAction("Tutup") {
-                        }
-                        .show()
-                    dialog.dismiss()
-                }.show()
-        }
-
         // untuk aktivitas tombol webview
         binding.tombolWebView.setOnClickListener {
             val intent = Intent(requireContext(), WebView::class.java)

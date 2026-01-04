@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // Ktor
@@ -66,6 +67,7 @@ dependencies {
 
     // ZXing QR generator
     implementation("com.google.zxing:core:3.5.2")
+    implementation(libs.androidx.core.splashscreen)
 
     // Room
     val room_version = "2.6.1"
