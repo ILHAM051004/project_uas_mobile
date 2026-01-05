@@ -2,7 +2,6 @@ package com.example.project_uas.Wahana
 
 import android.Manifest
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -24,15 +23,11 @@ class PembayaranFragment : Fragment() {
     private var _binding: FragmentPembayaranBinding? = null
     private val binding get() = _binding!!
 
-    // Launcher untuk meminta izin notifikasi (Wajib untuk Android 13+)
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        if (isGranted) {
-            Toast.makeText(context, "Notifikasi diizinkan", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(context, "Izin notifikasi ditolak. Anda tidak akan menerima pengingat.", Toast.LENGTH_LONG).show()
-        }
+        if (!isGranted) Toast.makeText(context, "Izin notifikasi ditolak", Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onCreateView(
@@ -47,10 +42,16 @@ class PembayaranFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Cek izin notifikasi saat halaman dibuka
         if (PermissionHelper.isNotificationPermissionRequired()) {
-            if (!PermissionHelper.hasPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)) {
-                PermissionHelper.requestPermission(requestPermissionLauncher, Manifest.permission.POST_NOTIFICATIONS)
+            if (!PermissionHelper.hasPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
+                PermissionHelper.requestPermission(
+                    requestPermissionLauncher,
+                    Manifest.permission.POST_NOTIFICATIONS
+                )
             }
         }
 
@@ -62,50 +63,62 @@ class PembayaranFragment : Fragment() {
         binding.tvOrderSummary.text = "Wahana: $wahana\nKategori: $kategori\nJumlah: $jumlah Tiket"
         binding.tvTotalBayar.text = "Total: Rp $total"
 
-        binding.btnBayarSimulasi.setOnClickListener {
-            val idTiket = "ZOO-" + System.currentTimeMillis().toString().takeLast(6)
 
+        binding.btnBayarSimulasi.setOnClickListener {
             lifecycleScope.launch {
                 try {
                     val api = TiketAPI(SupabaseClient.client)
-                    // Simpan data ke Supabase
-                    api.createTiket(wahana, "2025-01-12", jumlah.toInt())
 
-                    // 1. Kirim Notifikasi Instan
-                    NotificationHelper.showNotification(
-                        requireContext(),
-                        "Pembayaran Berhasil!",
-                        "Tiket $wahana Anda sudah aktif. Silakan tunjukkan QR Code.",
-                        Intent(requireContext(), com.example.project_uas.QRCode.QRCodeActivity::class.java)
-                    )
+                    // PENTING: Tangkap ID hasil generate dari TiketAPI
+                    // Jangan buat variabel idTiket manual lagi di sini
+                    val idTiketTerdaftar = api.createTiket(wahana, "2025-01-12", jumlah.toInt())
 
-                    // 2. Set Reminder Tepat 5 Detik dari sekarang
-                    val triggerTime = System.currentTimeMillis() + 5000
-                    ReminderHelper.setReminder(
-                        context = requireContext(),
-                        timeInMillis = triggerTime,
-                        title = "ZooApp Reminder",
-                        message = "Waktunya masuk ke wahana $wahana!",
-                        targetActivity = com.example.project_uas.QRCode.QRCodeActivity::class.java
-                    )
+                    if (idTiketTerdaftar != null) {
+                        // 1. Kirim Notifikasi Instan
+                        NotificationHelper.showNotification(
+                            requireContext(),
+                            "Pembayaran Berhasil!",
+                            "Tiket $wahana Anda sudah aktif.",
+                            Intent(
+                                requireContext(),
+                                com.example.project_uas.QRCode.QRCodeActivity::class.java
+                            )
+                        )
 
-                    // Munculkan Dialog Konfirmasi
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Pembayaran Berhasil!")
-                        .setMessage("ID Tiket: $idTiket\nNotifikasi pengingat akan muncul dalam 5 detik.")
-                        .setCancelable(false)
-                        .setPositiveButton("OK") { _, _ ->
-                            // Pindah ke Fragment QR Code dengan data lengkap
-                            val fragmentQR = TabQrcodeFragment().apply {
-                                arguments = Bundle().apply {
-                                    putString("ID_TIKET_OTOMATIS", idTiket)
-                                    putString("WAHANA", wahana)
-                                    putString("JUMLAH", jumlah)
-                                    putString("KATEGORI", kategori)
+                        // 2. Set Reminder
+                        val triggerTime = System.currentTimeMillis() + 5000
+                        ReminderHelper.setReminder(
+                            context = requireContext(),
+                            timeInMillis = triggerTime,
+                            title = "ZooApp Reminder",
+                            message = "Waktunya masuk ke wahana $wahana!",
+                            targetActivity = com.example.project_uas.QRCode.QRCodeActivity::class.java
+                        )
+
+                        // 3. Munculkan Dialog Konfirmasi
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Pembayaran Berhasil!")
+                            .setMessage("ID Tiket: $idTiketTerdaftar")
+                            .setCancelable(false)
+                            .setPositiveButton("OK") { _, _ ->
+                                // Pindah ke Fragment QR Code dengan ID ASLI dari database
+                                val fragmentQR = TabQrcodeFragment().apply {
+                                    arguments = Bundle().apply {
+                                        putString("ID_TIKET_OTOMATIS", idTiketTerdaftar)
+                                        putString("WAHANA", wahana)
+                                        putString("JUMLAH", jumlah)
+                                        putString("KATEGORI", kategori)
+                                    }
                                 }
-                            }
-                            (activity as BaseActivity).replaceFragment(fragmentQR)
-                        }.show()
+                                (activity as BaseActivity).replaceFragment(fragmentQR)
+                            }.show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Gagal menyimpan data ke database",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

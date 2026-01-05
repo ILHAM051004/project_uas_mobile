@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.project_uas.Content.TabScanFragment
 import com.example.project_uas.R
 import com.example.project_uas.databinding.ActivityQrcodeBinding
 

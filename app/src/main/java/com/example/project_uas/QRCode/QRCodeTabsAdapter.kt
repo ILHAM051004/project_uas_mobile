@@ -3,6 +3,7 @@ package com.example.project_uas.QRCode
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.project_uas.Content.TabScanFragment
 
 class QRCodeTabsAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     // Jumlah total tab yang ada
