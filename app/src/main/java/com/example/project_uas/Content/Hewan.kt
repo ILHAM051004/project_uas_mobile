@@ -12,30 +12,33 @@ import com.example.project_uas.databinding.ActivityHewanBinding
 
 class Hewan : AppCompatActivity() {
     private lateinit var binding: ActivityHewanBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityHewanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // untuk keterangan toolbar
+        // Setup Toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Hewan"
+            title = "Koleksi Satwa"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        // PERBAIKAN: Menggunakan binding.root agar tidak NullPointerException
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            // Padding top diset 0 karena sudah ditangani oleh AppBarLayout
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
             insets
         }
 
         // Menampilkan fragment pertama secara default
         replaceFragment(HewanHarimau())
 
-        // Setup event click untuk mengganti fragment
+        // Setup Toggle Group Click Listener
         binding.harimau.setOnClickListener {
             replaceFragment(HewanHarimau())
         }
@@ -47,11 +50,11 @@ class Hewan : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
             .replace(binding.fragmentContainer.id, fragment)
             .commit()
     }
 
-    // untuk tombol back berfungsi toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
