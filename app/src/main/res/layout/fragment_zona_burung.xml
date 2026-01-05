@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:padding="24dp"
-    tools:context=".Home.ZonaBurungFragment">
+    tools:context=".Content.ZonaBurungFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.example.project_uas.Comment
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +58,17 @@ class CommentFormActivity : AppCompatActivity() {
                 Toast.makeText(this, "Isi semua kolom!", Toast.LENGTH_SHORT).show()
             }
 
+        }
+    }
+
+    // untuk tombol back berfungsi toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

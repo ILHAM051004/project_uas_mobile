@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,22 +6,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityHewanBinding
+import com.example.project_uas.databinding.ActivityInfoBinding
 
-class Hewan : AppCompatActivity() {
-    private lateinit var binding: ActivityHewanBinding
+class Info : AppCompatActivity() {
+    private lateinit var binding: ActivityInfoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityHewanBinding.inflate(layoutInflater)
+        binding = ActivityInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // untuk keterangan toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Hewan"
+            title = "Informasi"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -32,23 +31,13 @@ class Hewan : AppCompatActivity() {
             insets
         }
 
-        // Menampilkan fragment pertama secara default
-        replaceFragment(HewanHarimau())
+        // untuk judul dan deskripsi
+        val j = intent.getStringExtra("judul")
+        val d = intent.getStringExtra("deskripsi")
 
-        // Setup event click untuk mengganti fragment
-        binding.harimau.setOnClickListener {
-            replaceFragment(HewanHarimau())
-        }
+        binding.judul.text = j
+        binding.deskripsi.text = d
 
-        binding.serigala.setOnClickListener {
-            replaceFragment(HewanSerigala())
-        }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainer.id, fragment)
-            .commit()
     }
 
     // untuk tombol back berfungsi toolbar

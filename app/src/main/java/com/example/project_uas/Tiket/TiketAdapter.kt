@@ -30,13 +30,12 @@ class TiketAdapter(
         // menampilkan teks
         binding.textNamaTiket.text = data.namaTiket
         binding.textDeskripsi.text = data.deskripsi
-        binding.textHarga.text = data.harga
 
         // tampilan ketika di klik
         view.setOnClickListener {
             Snackbar.make(
                 parent,
-                "Memilih ${data.namaTiket} - ${data.harga}",
+                "Memilih ${data.namaTiket}",
                 Snackbar.LENGTH_SHORT
             ).show()
         }

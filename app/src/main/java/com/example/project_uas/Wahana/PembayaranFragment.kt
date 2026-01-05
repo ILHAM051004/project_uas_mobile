@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.project_uas.BaseActivity
+import com.example.project_uas.Home.BaseActivity
 import com.example.project_uas.QRCode.TabQrcodeFragment
 import com.example.project_uas.QRCode.TiketAPI
 import com.example.project_uas.Utils.NotificationHelper

@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -9,9 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityTiketBinding
 import com.example.project_uas.databinding.ActivityWikiBinding
-import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.tabs.TabLayoutMediator
 
 class WikiActivity : AppCompatActivity() {

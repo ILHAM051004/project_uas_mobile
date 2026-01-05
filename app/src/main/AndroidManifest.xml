@@ -52,19 +52,19 @@
             android:name=".Comment.CommentFormActivity"
             android:exported="false" />
         <activity
-            android:name=".Home.WikiActivity"
+            android:name=".Content.WikiActivity"
             android:exported="false" />
         <activity
             android:name=".WelcomeScreen.Welcome"
             android:exported="false" />
         <activity
-            android:name=".BaseActivity"
+            android:name=".Home.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".Home.Hewan"
+            android:name=".Content.Hewan"
             android:exported="false" />
         <activity
-            android:name=".Home.Zona"
+            android:name=".Content.Zona"
             android:exported="false" />
         <activity
             android:name=".WelcomeScreen.SplashScreenActivity"
@@ -76,16 +76,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home.WebView"
+            android:name=".Content.WebView"
             android:exported="false" />
         <activity
-            android:name=".Home.Tiket"
+            android:name=".Content.Tiket"
             android:exported="false" />
         <activity
-            android:name=".Home.Info"
+            android:name=".Content.Info"
             android:exported="false" />
         <activity
-            android:name=".Home.RumusBangunDatarBangunRuang"
+            android:name=".Content.RumusBangunDatarBangunRuang"
             android:exported="false" />
         <activity
             android:name=".Login"

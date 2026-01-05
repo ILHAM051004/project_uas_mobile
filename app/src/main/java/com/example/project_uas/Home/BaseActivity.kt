@@ -1,4 +1,4 @@
-package com.example.project_uas
+package com.example.project_uas.Home
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -7,9 +7,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.project_uas.Comment.CommentFragment
-import com.example.project_uas.Home.HomeFragment
-import com.example.project_uas.Wahana.WahanaFragment
+import com.example.project_uas.ProfileFragment
+import com.example.project_uas.R
 import com.example.project_uas.Tiket.TiketFragment
+import com.example.project_uas.Wahana.WahanaFragment
 import com.example.project_uas.databinding.ActivityBaseBinding
 
 class BaseActivity : AppCompatActivity() {

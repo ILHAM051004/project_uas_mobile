@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
@@ -10,59 +11,136 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Checkout Tiket"
+        android:fontFamily="@font/inter_28pt_semibold"
+        android:text="Konfirmasi Pembayaran"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textSize="26sp" />
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:alpha="0.6"
+        android:text="Tinjau kembali detail pesanan Anda"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@color/bgButton3"
-        app:cardCornerRadius="16dp">
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="#20FFFFFF"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#40FFFFFF"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_28pt_semibold"
+                android:text="Ringkasan Tiket"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white" />
 
             <TextView
                 android:id="@+id/tvOrderSummary"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ringkasan..."
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:lineSpacingExtra="8dp"
+                android:text="Memuat ringkasan..."
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvTotalBayar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Total: Rp 0"
-                android:textColor="@color/bgButton2"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="24dp"
+                android:alpha="0.2"
+                android:background="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.8"
+                    android:text="Total Bayar"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvTotalBayar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/inter_28pt_semibold"
+                    android:text="Total: Rp 0"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+            </RelativeLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/inter_28pt_semibold"
+        android:text="Metode Pembayaran"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <RadioGroup
         android:id="@+id/rgMetodeBayar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
-        <RadioButton android:text="Saldo Zoo-Pay" android:textColor="@color/white" android:checked="true"/>
-        <RadioButton android:text="Transfer Bank VA" android:textColor="@color/white" />
+        android:layout_marginTop="12dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="#15FFFFFF"
+            android:buttonTint="@color/white"
+            android:checked="true"
+            android:drawablePadding="12dp"
+            android:paddingHorizontal="20dp"
+            android:text="Saldo Zoo-Pay (Instan)"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </RadioGroup>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBayarSimulasi"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="Konfirmasi dan Bayar"
-        android:backgroundTint="@color/bgButton2"
-        app:cornerRadius="12dp" />
+        android:layout_width="150dp"
+        android:layout_height="62dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/inter_28pt_semibold"
+        android:text="Bayar"
+        android:textAllCaps="false"
+        android:textColor="@color/bg"
+        android:textSize="16sp"
+        app:backgroundTint="@color/bgButton2"
+        app:cornerRadius="24dp"
+        app:elevation="12dp" />
+
 </LinearLayout>

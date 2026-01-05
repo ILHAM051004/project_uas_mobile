@@ -16,33 +16,23 @@ class TiketFragment : Fragment() {
         TiketModel(
             "Tiket Safari Day",
             "Nikmati petualangan seru di kebun binatang dengan mobil safari melihat hewan dari dekat.",
-            "Rp 75.000",
             "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/13/76/2d/9d.jpg"
         ),
         TiketModel(
             "Tiket Anak",
             "Paket spesial untuk anak-anak di bawah 12 tahun dengan akses taman bermain dan zona edukasi.",
-            "Rp 45.000",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYvJy-FENCpB9hh2YxL2pIrfTbd9fmYfB1YQ&s"
         ),
         TiketModel(
             "Tiket Edukasi Sekolah",
             "Program pembelajaran interaktif untuk siswa dengan pemandu profesional kebun binatang.",
-            "Rp 55.000",
-            "https://images.unsplash.com/photo-1523875194681-bedd468c58bf"
+            "https://images.unsplash.com/photo-1571055107559-3e67626fa8be" // iguana close-up
         ),
         TiketModel(
             "Tiket VIP",
             "Akses prioritas ke seluruh area dan nikmati semuanya.",
-            "Rp 120.000",
             "https://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/xepaarhevbitjbgbbdjf.jpg"
         ),
-        TiketModel(
-            "Tiket Reptile Zone",
-            "Masuk ke dunia reptil eksotis seperti ular, iguana, dan buaya dengan area aman dan nyaman.",
-            "Rp 65.000",
-            "https://images.unsplash.com/photo-1571055107559-3e67626fa8be" // iguana close-up
-        )
     )
 
 

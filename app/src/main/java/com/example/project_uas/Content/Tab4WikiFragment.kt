@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment

@@ -1,62 +1,53 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:background="@android:color/white">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp">
 
-    <!-- Gambar Wahana / Tiket -->
-
-    <!-- Nama Tiket -->
-    <ImageView
-        android:id="@+id/imgTiket"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:contentDescription="Gambar Tiket"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Deskripsi -->
-    <TextView
-        android:id="@+id/textNamaTiket"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tiket Safari"
-        android:layout_marginStart="20dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/imgTiket"
-        app:layout_constraintTop_toTopOf="@id/imgTiket" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textDeskripsi"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Menjelajahi area hewan liar menggunakan mobil terbuka"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintStart_toStartOf="@id/textNamaTiket"
-        app:layout_constraintTop_toBottomOf="@id/textNamaTiket"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/imgTiket"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/zoo" />
 
-    <!-- Harga -->
-    <TextView
-        android:id="@+id/textHarga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Rp 50.000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintStart_toStartOf="@id/textDeskripsi"
-        app:layout_constraintTop_toBottomOf="@id/textDeskripsi" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textNamaTiket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_28pt_semibold"
+                android:text="Nama Tiket"
+                android:textColor="#1B5E20"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textDeskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_28pt_medium"
+                android:maxLines="2"
+                android:text="Deskripsi tiket di sini..."
+                android:textColor="#636E72"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

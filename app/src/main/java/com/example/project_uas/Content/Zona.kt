@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,21 +6,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityInfoBinding
+import com.example.project_uas.databinding.ActivityZonaBinding
+import com.google.android.material.chip.Chip
 
-class Info : AppCompatActivity() {
-    private lateinit var binding: ActivityInfoBinding
+class Zona : AppCompatActivity() {
+    private lateinit var binding: ActivityZonaBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityInfoBinding.inflate(layoutInflater)
+        binding = ActivityZonaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // untuk keterangan toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Informasi"
+            title = "Zona"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -31,13 +33,25 @@ class Info : AppCompatActivity() {
             insets
         }
 
-        // untuk judul dan deskripsi
-        val j = intent.getStringExtra("judul")
-        val d = intent.getStringExtra("deskripsi")
+        // Menampilkan fragment pertama secara default
+        replaceFragment(ZonaReptilFragment())
 
-        binding.judul.text = j
-        binding.deskripsi.text = d
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+            val selectedChipId = checkedIds.firstOrNull()
+            if (selectedChipId != null) {
+                val chip = group.findViewById<Chip>(selectedChipId)
+                when (chip.id) {
+                    R.id.chipBurung -> replaceFragment(ZonaBurungFragment())
+                    R.id.chipReptil -> replaceFragment(ZonaReptilFragment())
+                }
+            }
+        }
+    }
 
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentContainer.id, fragment)
+            .commit()
     }
 
     // untuk tombol back berfungsi toolbar

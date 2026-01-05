@@ -77,10 +77,10 @@
                     android:id="@+id/gridMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:paddingHorizontal="12dp"
                     android:paddingBottom="16dp"
-                    app:columnCount="4">
+                    app:columnCount="3">
 
                     <LinearLayout
                         android:id="@+id/tombol1"
@@ -95,21 +95,6 @@
                         app:layout_columnWeight="1">
                         <ImageView android:layout_width="45dp" android:layout_height="45dp" android:src="@drawable/rumus" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:fontFamily="@font/inter_28pt_semibold" android:text="Rumus" android:textColor="@color/bg" android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/tombol2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="10dp"
-                        app:layout_columnWeight="1">
-                        <ImageView android:layout_width="45dp" android:layout_height="45dp" android:src="@drawable/tiket" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:fontFamily="@font/inter_28pt_semibold" android:text="Tiket" android:textColor="@color/bg" android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -140,21 +125,6 @@
                         app:layout_columnWeight="1">
                         <ImageView android:layout_width="45dp" android:layout_height="45dp" android:src="@drawable/website" />
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:fontFamily="@font/inter_28pt_semibold" android:text="Website" android:textColor="@color/bg" android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/zona"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="10dp"
-                        app:layout_columnWeight="1">
-                        <ImageView android:layout_width="45dp" android:layout_height="45dp" android:src="@drawable/zona" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:fontFamily="@font/inter_28pt_semibold" android:text="Zona" android:textColor="@color/bg" android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout

@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

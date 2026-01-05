@@ -1,24 +1,25 @@
 package com.example.project_uas.Home
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.project_uas.Content.Hewan
+import com.example.project_uas.Content.Info
+import com.example.project_uas.Content.RumusBangunDatarBangunRuang
+import com.example.project_uas.Content.Tiket
+import com.example.project_uas.Content.WebView
+import com.example.project_uas.Content.WikiActivity
+import com.example.project_uas.Content.Zona
 import com.example.project_uas.Data.Api.SloganApiClient
-import com.example.project_uas.Login
 import com.example.project_uas.QRCode.QRCodeActivity
-import com.example.project_uas.R
 import com.example.project_uas.databinding.FragmentHomeBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
+import com.example.project_uas.utils.SessionManager
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -41,7 +42,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Gunakan SessionManager agar datanya sama dengan saat Login
-        val session = com.example.project_uas.utils.SessionManager(requireContext())
+        val session = SessionManager(requireContext())
         val namaUser = session.getNama() ?: "Pengunjung" // Ambil nama yang disimpan
 
         // Set teks ke TextView judulWelcome yang ada di atas imgHeader
@@ -58,13 +59,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        // untuk aktivitas tombol 2
-        binding.tombol2.setOnClickListener {
-            val intent = Intent(requireContext(), Tiket::class.java)
-            intent.putExtra("judul", "Pembelian Tiket")
-            intent.putExtra("deskripsi", "Beli tiket untuk masuk ke kebun binatang")
-            startActivity(intent)
-        }
 
         // untuk aktivitas tombol 3
         binding.tombol3.setOnClickListener {
@@ -77,12 +71,6 @@ class HomeFragment : Fragment() {
         // untuk aktivitas tombol webview
         binding.tombolWebView.setOnClickListener {
             val intent = Intent(requireContext(), WebView::class.java)
-            startActivity(intent)
-        }
-
-        // untuk aktivitas tombol zona
-        binding.zona.setOnClickListener {
-            val intent = Intent(requireContext(), Zona::class.java)
             startActivity(intent)
         }
 
@@ -124,14 +112,14 @@ class HomeFragment : Fragment() {
                         layoutManager = LinearLayoutManager(requireContext())
                         adapter = SloganAdapter(data)
                     }
-                    android.util.Log.d("API_SUCCESS", "Data berhasil dimuat: ${data.size} item")
+                    Log.d("API_SUCCESS", "Data berhasil dimuat: ${data.size} item")
                 } else {
-                    android.util.Log.d("API_SUCCESS", "Data kosong di tabel")
+                    Log.d("API_SUCCESS", "Data kosong di tabel")
                 }
 
             } catch (e: Exception) {
                 // Cek pesan ini di Logcat untuk tahu alasan gagal (401=Key Salah, 404=Tabel Salah)
-                android.util.Log.e("API_ERROR", "Detail Error: ${e.message}")
+                Log.e("API_ERROR", "Detail Error: ${e.message}")
             }
         }
     }

@@ -3,7 +3,7 @@ package com.example.project_uas.Utils
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.project_uas.BaseActivity
+import com.example.project_uas.Home.BaseActivity
 import com.example.project_uas.Utils.NotificationHelper
 
 class ReminderReceiver : BroadcastReceiver() {

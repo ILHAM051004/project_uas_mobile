@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.project_uas.BaseActivity
+import com.example.project_uas.Home.BaseActivity
 import com.example.project_uas.Login
 import com.example.project_uas.R
 import com.example.project_uas.databinding.ActivityWelcomeBinding

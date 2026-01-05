@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import com.example.project_uas.BaseActivity
+import com.example.project_uas.Home.BaseActivity
 import com.example.project_uas.databinding.FragmentOrderWahanaBinding
 
 class OrderWahanaFragment : Fragment() {
@@ -20,7 +20,7 @@ class OrderWahanaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set Spinner Kategori secara programmatik agar tidak error
-        val listKategori = listOf("Dewasa", "Anak-anak", "Lansia")
+        val listKategori = listOf("Dewasa", "Anak-anak")
         val adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listKategori)
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerKategori.adapter = adapterSpinner

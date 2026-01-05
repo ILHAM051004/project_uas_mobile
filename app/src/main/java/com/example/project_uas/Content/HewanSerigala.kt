@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.example.project_uas.Data.Api.SerigalaApiClient
-import com.example.project_uas.R
 import com.example.project_uas.databinding.FragmentHewanSerigalaBinding
 import kotlinx.coroutines.launch
 

@@ -1,28 +1,27 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.webkit.WebViewClient
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityWebViewBinding
+import com.example.project_uas.databinding.ActivityTiketBinding
 
-
-class WebView : AppCompatActivity() {
-    private lateinit var binding: ActivityWebViewBinding
+class Tiket : AppCompatActivity() {
+    private lateinit var binding: ActivityTiketBinding
+    private val apiKey = "Q2lBbaKeQZKezz6YCVyNQg==fXYdwWxpTYGFYfgP"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityWebViewBinding.inflate(layoutInflater)
+        binding = ActivityTiketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // untuk keterangan toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Zoo Website"
+            title = "Tiket"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -33,20 +32,15 @@ class WebView : AppCompatActivity() {
             insets
         }
 
-        // khusus untuk webview
-        binding.webView.webViewClient = WebViewClient()
-        binding.webView.settings.javaScriptEnabled = true
-        binding.webView.loadUrl("https://gembiralokazoo.com/")
+        //untuk judul dan deskripsi
+        val jt = intent.getStringExtra("judul")
+        val dt = intent.getStringExtra("deskripsi")
 
-        // agar toolbar hide/show saat scroll web
-        binding.webView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            if (scrollY > oldScrollY) {
-                binding.appbar.setExpanded(false, true) // sembunyikan
-            } else if (scrollY < oldScrollY) {
-                binding.appbar.setExpanded(true, true) // tampilkan
-            }
-        }
+        binding.judul.text = jt
+        binding.deskripsi.text = dt
+
     }
+
 
     // untuk tombol back berfungsi toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -55,6 +49,7 @@ class WebView : AppCompatActivity() {
                 onBackPressedDispatcher.onBackPressed()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

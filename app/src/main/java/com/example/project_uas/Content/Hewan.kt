@@ -1,4 +1,4 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,25 +6,22 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
-import com.example.project_uas.Data.Api.HarimauApiClient
+import androidx.fragment.app.Fragment
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityTiketBinding
-import kotlinx.coroutines.launch
+import com.example.project_uas.databinding.ActivityHewanBinding
 
-class Tiket : AppCompatActivity() {
-    private lateinit var binding: ActivityTiketBinding
-    private val apiKey = "Q2lBbaKeQZKezz6YCVyNQg==fXYdwWxpTYGFYfgP"
+class Hewan : AppCompatActivity() {
+    private lateinit var binding: ActivityHewanBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityTiketBinding.inflate(layoutInflater)
+        binding = ActivityHewanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // untuk keterangan toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Tiket"
+            title = "Hewan"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -35,15 +32,24 @@ class Tiket : AppCompatActivity() {
             insets
         }
 
-        //untuk judul dan deskripsi
-        val jt = intent.getStringExtra("judul")
-        val dt = intent.getStringExtra("deskripsi")
+        // Menampilkan fragment pertama secara default
+        replaceFragment(HewanHarimau())
 
-        binding.judul.text = jt
-        binding.deskripsi.text = dt
+        // Setup event click untuk mengganti fragment
+        binding.harimau.setOnClickListener {
+            replaceFragment(HewanHarimau())
+        }
 
+        binding.serigala.setOnClickListener {
+            replaceFragment(HewanSerigala())
+        }
     }
 
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentContainer.id, fragment)
+            .commit()
+    }
 
     // untuk tombol back berfungsi toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

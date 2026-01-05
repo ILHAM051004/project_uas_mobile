@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.project_uas.Home.BaseActivity
 import com.example.project_uas.databinding.ActivityLoginBinding
 import com.example.project_uas.Profile.Profile
 import com.example.project_uas.supabase.SupabaseClient

@@ -1,29 +1,28 @@
-package com.example.project_uas.Home
+package com.example.project_uas.Content
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
+import android.webkit.WebViewClient
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import com.example.project_uas.R
-import com.example.project_uas.databinding.ActivityZonaBinding
-import com.google.android.material.chip.Chip
+import com.example.project_uas.databinding.ActivityWebViewBinding
 
-class Zona : AppCompatActivity() {
-    private lateinit var binding: ActivityZonaBinding
+
+class WebView : AppCompatActivity() {
+    private lateinit var binding: ActivityWebViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityZonaBinding.inflate(layoutInflater)
+        binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // untuk keterangan toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Zona"
+            title = "Zoo Website"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -34,25 +33,19 @@ class Zona : AppCompatActivity() {
             insets
         }
 
-        // Menampilkan fragment pertama secara default
-        replaceFragment(ZonaReptilFragment())
+        // khusus untuk webview
+        binding.webView.webViewClient = WebViewClient()
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.loadUrl("https://gembiralokazoo.com/")
 
-        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
-            val selectedChipId = checkedIds.firstOrNull()
-            if (selectedChipId != null) {
-                val chip = group.findViewById<Chip>(selectedChipId)
-                when (chip.id) {
-                    R.id.chipBurung -> replaceFragment(ZonaBurungFragment())
-                    R.id.chipReptil -> replaceFragment(ZonaReptilFragment())
-                }
+        // agar toolbar hide/show saat scroll web
+        binding.webView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                binding.appbar.setExpanded(false, true) // sembunyikan
+            } else if (scrollY < oldScrollY) {
+                binding.appbar.setExpanded(true, true) // tampilkan
             }
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainer.id, fragment)
-            .commit()
     }
 
     // untuk tombol back berfungsi toolbar
@@ -62,7 +55,6 @@ class Zona : AppCompatActivity() {
                 onBackPressedDispatcher.onBackPressed()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
